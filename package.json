@@ -2,7 +2,7 @@
   "name": "starlight-github-alerts-monorepo",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "// TODO(HiDeoo) ",
+  "description": "Starlight plugin to render GitHub alerts as Starlight asides.",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "scripts": {
@@ -31,7 +31,12 @@
   "private": true,
   "sideEffects": false,
   "keywords": [
-    "// TODO(HiDeoo) "
+    "starlight",
+    "github",
+    "alerts",
+    "asides",
+    "documentation",
+    "astro"
   ],
   "homepage": "https://github.com/HiDeoo/starlight-github-alerts",
   "repository": {
