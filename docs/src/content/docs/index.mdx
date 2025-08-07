@@ -1,9 +1,9 @@
 ---
-title: // TODO(HiDeoo) same 1
-description: // TODO(HiDeoo) same 2
+title: Starlight GitHub Alerts
+description: Starlight plugin to render GitHub alerts as Starlight asides.
 head:
   - tag: title
-    content: // TODO(HiDeoo) same 1
+    content: Starlight GitHub Alerts
   - tag: style
     content: |
       .hero-html {
@@ -12,14 +12,38 @@ head:
         justify-content: center;
         line-height: var(--size);
       }
+
+      .showcase {
+        flex-direction: column;
+      }
+
+      .content-panel .card:nth-child(1) {
+        --sl-card-border: var(--sl-color-red);
+        --sl-card-bg: var(--sl-color-red-low);
+      }
+
+      .content-panel .card:nth-child(2) {
+        --sl-card-border: var(--sl-color-green);
+        --sl-card-bg: var(--sl-color-green-low);
+      }
+
+      @media (min-width: 50rem) {
+        .content-panel .card {
+          width: 80%;
+        }
+
+        .content-panel .card:nth-child(2) {
+          # background:red;
+          align-self: end;
+        }
+      }
 template: splash
 editUrl: false
 lastUpdated: false
 hero:
-  tagline: // TODO(HiDeoo) same 2
+  tagline: Starlight plugin to render GitHub alerts as Starlight asides.
   image:
-    # // TODO(HiDeoo)
-    html: '📜'
+    html: '📢'
   actions:
     - text: Getting Started
       link: /getting-started/
@@ -30,24 +54,21 @@ hero:
       variant: minimal
 ---
 
-// TODO(HiDeoo)
+import { Card, CardGrid, Code } from '@astrojs/starlight/components'
 
-import { Card, CardGrid } from '@astrojs/starlight/components'
+<div class="showcase sl-flex">
+<Card title="Transform" icon="close">
+  <Code
+    code={`> [!NOTE]
+> Useful information that users should know, even when skimming content.`}
+    lang="md"
+  />
+</Card>
 
-## Next steps
+<Card title="Into" icon="approve-check">
 
-<CardGrid stagger>
-  <Card title="Install the plugin" icon="puzzle">
-    Check the [getting started guide](/getting-started/) for installation instructions.
-  </Card>
-  <Card title="Configure the plugin" icon="setting">
-    Edit your config in `astro.config.mjs`.
-  </Card>
-  <Card title="Configure the content loader" icon="document">
-    Defines changelogs to generate using various providers, e.g. [Changesets](/providers/changesets/) or [GitHub
-    releases](/providers/github/).
-  </Card>
-  <Card title="Link to changelogs" icon="external">
-    Learn how to [link to generated changelog pages](/guides/changelog-links/) in your documentation.
-  </Card>
-</CardGrid>
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+</Card>
+</div>

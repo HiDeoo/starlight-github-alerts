@@ -1,0 +1,65 @@
+---
+title: Getting Started
+description: Learn how to render GitHub alerts as Starlight asides in your Markdown and MDX content.
+---
+
+A [Starlight](https://starlight.astro.build) plugin to render [GitHub alerts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) as [Starlight asides](https://starlight.astro.build/components/asides/) in your Markdown and MDX content.
+
+Check out the [demo](/demo/) for a preview of the plugin in action.
+
+## Prerequisites
+
+You will need to have a Starlight website set up.
+If you don't have one yet, you can follow the ["Getting Started"](https://starlight.astro.build/getting-started/) guide in the Starlight docs to create one.
+
+## Installation
+
+import { Steps } from '@astrojs/starlight/components'
+import { PackageManagers } from '@hideoo/starlight-plugins-docs-components'
+import { Preview } from '@hideoo/starlight-plugins-docs-components'
+
+<Steps>
+
+1. Starlight GitHub Alerts is a Starlight [plugin](https://starlight.astro.build/reference/plugins/). Install it using your favorite package manager:
+
+   <PackageManagers pkg="starlight-github-alerts" />
+
+2. Add the plugin to your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file.
+
+   ```js title="astro.config.mjs" ins={4,9}
+   // @ts-check
+   import starlight from '@astrojs/starlight'
+   import { defineConfig } from 'astro/config'
+   import starlightGitHubAlerts from 'starlight-github-alerts'
+
+   export default defineConfig({
+     integrations: [
+       starlight({
+         plugins: [starlightGitHubAlerts()],
+         title: 'My Docs',
+       }),
+     ],
+   })
+   ```
+
+3. [Start the development server](https://starlight.astro.build/getting-started/#start-the-development-server) to preview GitHub alerts rendered as Starlight asides.
+
+   <Preview>
+
+   ```md
+   > [!NOTE]
+   > Useful information that users should know, even when skimming content.
+   ```
+
+   <Fragment slot="preview">
+
+   > [!NOTE]
+   > Useful information that users should know, even when skimming content.
+
+   </Fragment>
+
+   </Preview>
+
+</Steps>
+
+Check the [configuration reference](/configuration/) for more information on the available options to customize how GitHub alerts should be rendered.

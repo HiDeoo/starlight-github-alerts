@@ -2,17 +2,25 @@ import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
 import starlightGitHubAlerts from 'starlight-github-alerts'
 
-// TODO(HiDeoo) favicon
-// TODO(HiDeoo) READMEs
-
 export default defineConfig({
   integrations: [
     starlight({
-      description: '// TODO(HiDeoo) ',
+      description: 'Starlight plugin to render GitHub alerts as Starlight asides.',
       editLink: {
         baseUrl: 'https://github.com/HiDeoo/starlight-github-alerts/edit/main/docs/',
       },
       plugins: [starlightGitHubAlerts()],
+      sidebar: [
+        {
+          label: 'Start Here',
+          items: ['getting-started', 'configuration'],
+        },
+        {
+          label: 'Resources',
+          items: [{ label: 'Plugins and Tools', slug: 'resources/starlight' }],
+        },
+        'demo',
+      ],
       social: [
         {
           href: 'https://bsky.app/profile/hideoo.dev',
@@ -25,7 +33,7 @@ export default defineConfig({
           label: 'GitHub',
         },
       ],
-      title: '// TODO(HiDeoo) ',
+      title: 'Starlight GitHub Alerts',
     }),
   ],
   site: 'https://starlight-github-alerts.netlify.app/',
