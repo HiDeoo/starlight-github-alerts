@@ -13,9 +13,13 @@
   <br />
 </div>
 
-## Getting Started
+## Documentation
 
-Want to get started immediately? Check out the [getting started guide](https://starlight-github-alerts.netlify.app/getting-started/) or check out the [demo](https://starlight-github-alerts.netlify.app/demo/) page to see the plugin in action.
+Run the documentation locally using [pnpm](https://pnpm.io):
+
+```shell
+pnpm run dev
+```
 
 ## License
 
