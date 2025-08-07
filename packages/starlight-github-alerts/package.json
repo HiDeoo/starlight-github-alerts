@@ -13,6 +13,18 @@
     "test": "vitest",
     "lint": "eslint . --cache --max-warnings=0"
   },
+  "dependencies": {
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.4",
+    "remark-directive": "^3.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.5",
+    "vfile": "^6.0.3",
+    "vitest": "^3.2.4"
+  },
   "peerDependencies": {
     "@astrojs/starlight": ">=0.35.0"
   },
