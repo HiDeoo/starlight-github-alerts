@@ -1,0 +1,53 @@
+---
+title: // TODO(HiDeoo) same 1
+description: // TODO(HiDeoo) same 2
+head:
+  - tag: title
+    content: // TODO(HiDeoo) same 1
+  - tag: style
+    content: |
+      .hero-html {
+        --size: 12rem;
+        font-size: var(--size);
+        justify-content: center;
+        line-height: var(--size);
+      }
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  tagline: // TODO(HiDeoo) same 2
+  image:
+    # // TODO(HiDeoo)
+    html: '📜'
+  actions:
+    - text: Getting Started
+      link: /getting-started/
+      icon: rocket
+    - text: Demo
+      link: /demo/
+      icon: right-arrow
+      variant: minimal
+---
+
+// TODO(HiDeoo)
+
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+## Next steps
+
+<CardGrid stagger>
+  <Card title="Install the plugin" icon="puzzle">
+    Check the [getting started guide](/getting-started/) for installation instructions.
+  </Card>
+  <Card title="Configure the plugin" icon="setting">
+    Edit your config in `astro.config.mjs`.
+  </Card>
+  <Card title="Configure the content loader" icon="document">
+    Defines changelogs to generate using various providers, e.g. [Changesets](/providers/changesets/) or [GitHub
+    releases](/providers/github/).
+  </Card>
+  <Card title="Link to changelogs" icon="external">
+    Learn how to [link to generated changelog pages](/guides/changelog-links/) in your documentation.
+  </Card>
+</CardGrid>

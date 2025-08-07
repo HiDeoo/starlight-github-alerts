@@ -1,1 +1,1 @@
-# starlight-github-alerts
+packages/starlight-github-alerts/README.md
