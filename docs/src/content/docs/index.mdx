@@ -1,0 +1,74 @@
+---
+title: Starlight GitHub Alerts
+description: Starlight plugin to render GitHub alerts as Starlight asides.
+head:
+  - tag: title
+    content: Starlight GitHub Alerts
+  - tag: style
+    content: |
+      .hero-html {
+        --size: 12rem;
+        font-size: var(--size);
+        justify-content: center;
+        line-height: var(--size);
+      }
+
+      .showcase {
+        flex-direction: column;
+      }
+
+      .content-panel .card:nth-child(1) {
+        --sl-card-border: var(--sl-color-red);
+        --sl-card-bg: var(--sl-color-red-low);
+      }
+
+      .content-panel .card:nth-child(2) {
+        --sl-card-border: var(--sl-color-green);
+        --sl-card-bg: var(--sl-color-green-low);
+      }
+
+      @media (min-width: 50rem) {
+        .content-panel .card {
+          width: 80%;
+        }
+
+        .content-panel .card:nth-child(2) {
+          # background:red;
+          align-self: end;
+        }
+      }
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  tagline: Starlight plugin to render GitHub alerts as Starlight asides.
+  image:
+    html: '📢'
+  actions:
+    - text: Getting Started
+      link: /getting-started/
+      icon: rocket
+    - text: Demo
+      link: /demo/
+      icon: right-arrow
+      variant: minimal
+---
+
+import { Card, CardGrid, Code } from '@astrojs/starlight/components'
+
+<div class="showcase sl-flex">
+<Card title="Transform" icon="close">
+  <Code
+    code={`> [!NOTE]
+> Useful information that users should know, even when skimming content.`}
+    lang="md"
+  />
+</Card>
+
+<Card title="Into" icon="approve-check">
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+</Card>
+</div>
