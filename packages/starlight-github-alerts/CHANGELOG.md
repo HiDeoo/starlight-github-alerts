@@ -1,5 +1,11 @@
 # starlight-github-alerts
 
+## 0.1.1
+
+### Patch Changes
+
+- [#3](https://github.com/HiDeoo/starlight-github-alerts/pull/3) [`6521280`](https://github.com/HiDeoo/starlight-github-alerts/commit/65212803d3aedbfc75fb6888cc78349d40e87a34) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Setups trusted publishing using OpenID Connect (OIDC) authentication — no code changes.
+
 ## 0.1.0
 
 ### Minor Changes
