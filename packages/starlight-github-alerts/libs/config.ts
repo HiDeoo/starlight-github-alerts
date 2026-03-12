@@ -43,9 +43,9 @@ export const StarlightGitHubAlertsConfigSchema = z
          */
         warning: starlightAsideTypeSchema.default('caution'),
       })
-      .default({}),
+      .prefault({}),
   })
-  .default({})
+  .prefault({})
 
 export type StarlightGitHubAlertsUserConfig = z.input<typeof StarlightGitHubAlertsConfigSchema>
 export type StarlightGitHubAlertsConfig = z.output<typeof StarlightGitHubAlertsConfigSchema>
