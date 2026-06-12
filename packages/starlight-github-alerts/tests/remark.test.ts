@@ -146,27 +146,58 @@ test('does not transform nested alerts', async () => {
   `)
 })
 
-test('does not transform alerts for file not part of the docs collection', async () => {
+test('transforms alerts for files in configured custom markdown processor paths', async () => {
   const res = await renderMarkdown(
     `
 > [!NOTE]
-> An alert not part of the docs collection.
+> An alert in a configured custom markdown processor path.
 `,
-    { url: new URL(`src/content/test/index.md`, import.meta.url) },
+    {
+      markdownProcessorPaths: [fileURLToPath(new URL('src/content/test/', import.meta.url))],
+      url: new URL(`src/content/test/index.md`, import.meta.url),
+    },
   )
 
   expect(res.value).toMatchInlineSnapshot(`
-    "> \\[!NOTE]
-    > An alert not part of the docs collection.
+    ":::note
+    An alert in a configured custom markdown processor path.
+    :::
     "
   `)
 })
 
+test('does not transform alerts for files outside of any configured markdown processor paths', async () => {
+  const content = `
+> [!NOTE]
+> An alert outside of any configured markdown processor paths.
+`
+
+  const testcases = [
+    { content, url: new URL(`src/content/test/index.md`, import.meta.url) },
+    {
+      content,
+      markdownProcessorPaths: [fileURLToPath(new URL('src/content/test/', import.meta.url))],
+      url: new URL(`src/content/testimonials/index.md`, import.meta.url),
+    },
+  ]
+
+  for (const testCase of testcases) {
+    const res = await renderMarkdown(
+      testCase.content,
+      testCase.markdownProcessorPaths
+        ? { markdownProcessorPaths: testCase.markdownProcessorPaths, url: testCase.url }
+        : { url: testCase.url },
+    )
+
+    expect(res.value).toMatch(/^> \\?\[!NOTE]/)
+  }
+})
+
 function renderMarkdown(
   content: string,
-  options?: { config?: StarlightGitHubAlertsUserConfig; docsCollectionPath?: string; url?: URL | undefined },
+  options?: { config?: StarlightGitHubAlertsUserConfig; markdownProcessorPaths?: string[]; url?: URL | undefined },
 ) {
-  return (options?.config || options?.docsCollectionPath ? createMarkdownProcessor(options) : processor).process(
+  return (options?.config || options?.markdownProcessorPaths ? createMarkdownProcessor(options) : processor).process(
     new VFile({
       path: fileURLToPath(options?.url ?? new URL(`src/content/docs/index.md`, import.meta.url)),
       value: content,
@@ -179,7 +210,9 @@ function createMarkdownProcessor(options?: Parameters<typeof renderMarkdown>[1])
     .use(remarkParse)
     .use(remarkStarlightGitHubAlerts, {
       config: StarlightGitHubAlertsConfigSchema.parse(options?.config),
-      docsCollectionPath: options?.docsCollectionPath ?? fileURLToPath(new URL('src/content/docs/', import.meta.url)),
+      markdownProcessorPaths: options?.markdownProcessorPaths ?? [
+        fileURLToPath(new URL('src/content/docs/', import.meta.url)),
+      ],
     })
     .use(remarkDirective)
     .use(remarkStringify)

@@ -1,10 +1,9 @@
-import { fileURLToPath } from 'node:url'
-
 import type { StarlightPlugin } from '@astrojs/starlight/types'
 import { AstroError } from 'astro/errors'
 
 import { StarlightGitHubAlertsConfigSchema, type StarlightGitHubAlertsUserConfig } from './libs/config'
 import { remarkStarlightGitHubAlerts } from './libs/remark'
+import { getMarkdownProcessorPaths } from './libs/starlight'
 
 export default function starlightGitHubAlerts(userConfig?: StarlightGitHubAlertsUserConfig): StarlightPlugin {
   const parsedConfig = StarlightGitHubAlertsConfigSchema.safeParse(userConfig)
@@ -19,25 +18,25 @@ export default function starlightGitHubAlerts(userConfig?: StarlightGitHubAlerts
   return {
     name: 'starlight-github-alerts',
     hooks: {
-      'config:setup': ({ addIntegration }) => {
+      'config:setup': ({ addIntegration, config: starlightConfig }) => {
         addIntegration({
           name: 'starlight-github-alerts-integration',
           hooks: {
-            'astro:config:setup': ({ command, config }) => {
+            'astro:config:setup': ({ command, config: astroConfig }) => {
               if (command !== 'dev' && command !== 'build') return
 
-              const remarkDirectiveIndex = config.markdown.remarkPlugins.findIndex(
+              const remarkDirectiveIndex = astroConfig.markdown.remarkPlugins.findIndex(
                 (plugin) => typeof plugin === 'function' && plugin.name === 'remarkDirective',
               )
 
               if (remarkDirectiveIndex === -1) return
 
               // Inject the remark plugin before the `remarkDirective` plugin.
-              config.markdown.remarkPlugins.splice(remarkDirectiveIndex, 0, [
+              astroConfig.markdown.remarkPlugins.splice(remarkDirectiveIndex, 0, [
                 remarkStarlightGitHubAlerts,
                 {
                   config: parsedConfig.data,
-                  docsCollectionPath: fileURLToPath(new URL('content/docs/', config.srcDir)),
+                  markdownProcessorPaths: getMarkdownProcessorPaths(starlightConfig, astroConfig),
                 },
               ])
             },
