@@ -1,5 +1,11 @@
 # starlight-github-alerts
 
+## 0.2.1
+
+### Patch Changes
+
+- [#9](https://github.com/HiDeoo/starlight-github-alerts/pull/9) [`b86cfd5`](https://github.com/HiDeoo/starlight-github-alerts/commit/b86cfd5ca2acb26145e986a649a73ba3e7594aaa) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for transforming GitHub alerts in Markdown files configured using Starlight’s `markdown.processedDirs` option.
+
 ## 0.2.0
 
 ### Minor Changes
