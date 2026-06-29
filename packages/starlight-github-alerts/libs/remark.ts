@@ -3,9 +3,8 @@ import type { Plugin } from 'unified'
 import { CONTINUE, SKIP, visit } from 'unist-util-visit'
 
 import type { StarlightGitHubAlertsConfig } from './config'
+import { getTypeMatch, isValidType } from './markdown'
 import { shouldTransformPath } from './starlight'
-
-const alertRegex = /^(?<line>\[!(?<type>\w+)][\r\n]*)/
 
 export const remarkStarlightGitHubAlerts: Plugin<[RemarkStarlightGitHubAlertsConfig], Root> = function ({
   config,
@@ -22,14 +21,12 @@ export const remarkStarlightGitHubAlerts: Plugin<[RemarkStarlightGitHubAlertsCon
       const [firstGrandChild] = firstChild.children
       if (firstGrandChild?.type !== 'text') return CONTINUE
 
-      const match = alertRegex.exec(firstGrandChild.value)
-      const { type } = match?.groups ?? {}
+      const { match, type } = getTypeMatch(firstGrandChild.value)
 
-      const normalizedType = type?.toLowerCase()
-      if (!isValidType(config, normalizedType)) return CONTINUE
-      const asideType = config.types[normalizedType]
+      if (!match || !isValidType(config, type)) return CONTINUE
+      const asideType = config.types[type]
 
-      firstGrandChild.value = firstGrandChild.value.slice(match?.[0].length).trimStart()
+      firstGrandChild.value = firstGrandChild.value.slice(match[0].length).trimStart()
 
       parent.children.splice(index, 1, {
         type: 'containerDirective',
@@ -41,13 +38,6 @@ export const remarkStarlightGitHubAlerts: Plugin<[RemarkStarlightGitHubAlertsCon
       return SKIP
     })
   }
-}
-
-function isValidType(
-  config: StarlightGitHubAlertsConfig,
-  type: string | undefined,
-): type is keyof StarlightGitHubAlertsConfig['types'] {
-  return type !== undefined && type.toLowerCase() in config.types
 }
 
 interface RemarkStarlightGitHubAlertsConfig {
