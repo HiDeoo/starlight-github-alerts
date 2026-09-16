@@ -28,11 +28,11 @@ export const remarkStarlightGitHubAlerts: Plugin<[RemarkStarlightGitHubAlertsCon
 
       firstGrandChild.value = firstGrandChild.value.slice(match[0].length).trimStart()
 
-      parent.children.splice(index, 1, {
+      parent.children[index] = {
         type: 'containerDirective',
         name: asideType,
         children: node.children,
-      })
+      }
 
       // Nested asides are not supported by GitHub.
       return SKIP
