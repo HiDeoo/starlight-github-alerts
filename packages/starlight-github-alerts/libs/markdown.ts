@@ -13,5 +13,5 @@ export function isValidType(
   config: StarlightGitHubAlertsConfig,
   type: string | undefined,
 ): type is keyof StarlightGitHubAlertsConfig['types'] {
-  return type !== undefined && type.toLowerCase() in config.types
+  return type !== undefined && Object.hasOwn(config.types, type.toLowerCase())
 }
