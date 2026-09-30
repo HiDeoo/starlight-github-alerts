@@ -11,18 +11,7 @@ export function applyMarkdownPlugin(
   markdownProcessorPaths: string[],
 ) {
   if (isSatteriProcessor(processor)) {
-    const starlightAsidesIndex = processor.options.mdastPlugins.findIndex(
-      (plugin) =>
-        typeof plugin === 'object' && plugin !== null && 'name' in plugin && plugin.name === 'starlight-asides',
-    )
-
-    if (starlightAsidesIndex === -1) return
-
-    processor.options.mdastPlugins.splice(
-      starlightAsidesIndex,
-      0,
-      satteriStarlightGithubAlerts(config, markdownProcessorPaths),
-    )
+    processor.options.mdastPlugins.unshift(satteriStarlightGithubAlerts(config, markdownProcessorPaths))
   } else if (isUnifiedProcessor(processor)) {
     const remarkDirectiveIndex = processor.options.remarkPlugins.findIndex(
       (plugin) => typeof plugin === 'function' && plugin.name === 'remarkDirective',

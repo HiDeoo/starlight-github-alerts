@@ -14,10 +14,11 @@
     "lint": "eslint . --cache --max-warnings=0"
   },
   "dependencies": {
-    "satteri": "^0.9.3",
+    "satteri": "^0.10.3",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
+    "@astrojs/starlight": "^0.42.4",
     "@types/mdast": "^4.0.4",
     "remark-directive": "^4.0.0",
     "remark-parse": "^11.0.0",
@@ -27,7 +28,7 @@
     "vitest": "^4.1.0"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.41.0"
+    "@astrojs/starlight": ">=0.42.0"
   },
   "publishConfig": {
     "access": "public"
