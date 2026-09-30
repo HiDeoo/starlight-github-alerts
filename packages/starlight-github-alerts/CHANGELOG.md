@@ -1,5 +1,17 @@
 # starlight-github-alerts
 
+## 0.5.0
+
+### Minor Changes
+
+- [#18](https://github.com/HiDeoo/starlight-github-alerts/pull/18) [`c0270b4`](https://github.com/HiDeoo/starlight-github-alerts/commit/c0270b4b5f0b5df3319938c48fe2eef6e6321432) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now version `0.42.0`.
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.4.0
 
 ### Minor Changes
